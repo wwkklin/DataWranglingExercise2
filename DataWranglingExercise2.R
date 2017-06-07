@@ -12,7 +12,6 @@ mydata$embarked[x] <- "S"
 # Check whether row 169 and row 285 are assinged to "S"
 # mydata$embarked[169]
 # mydata$embarked[285]
-
 # Check whether embarked still has missing values
 # which(mydata$embarked =="")
 # is.na(mydata$embarked) 
@@ -30,33 +29,26 @@ mydata$age[x] <-avg_age
 #     }
 # }
 
-
 # 2-2:Think about other ways you could have populated the missing values in the age column. 
 # Why would you pick any of those over the mean (or not)?
-
 # load original data
 oridata = read.csv("titanic3.csv", header=TRUE) 
 mean(oridata$age, na.rm = TRUE)
 median(oridata$age,na.rm = TRUE)
 hist(oridata$age)
-
 # Answere:
 # I would use mean to fill the missing data in age column.
-# Before populating NA in age, the median and mean of age are similar.
-# Also, the distribution of age indicate the mean is around 30 with relatively normal distribution. 
+# In the original data, the median and mean of age are similar. Also, the distribution of age indicate the mean is around 30 with relatively normal distribution. 
 # Thus, I think the mean of age can be used to represent the NA in age.
 
 # 3: Lifeboat
 # In boat column, fill empty slots with a dummy value (e.g. the string 'None' or 'NA')
-
 for (i in seq_along(mydata$boat)) {
      if (mydata$boat[i]==""){
          mydata$boat[i] <- as.character(NA) 
      }
  }
-
-# mydata$boat[i] <- "NA" 
-# Warning messages:
+# If I use { mydata$boat[i] <- "NA" } in line48, it gives warning messages:
 # 1: In `[<-.factor`(`*tmp*`, i, value = structure(c(13L, 4L,  ... : invalid factor level, NA generated
 
 
@@ -71,9 +63,7 @@ for (i in seq_along(mydata$boat)) {
 
 # You have a hunch that the fact that the cabin number is missing might be a useful indicator of survival. 
 # Create a new column has_cabin_number which has 1 if there is a cabin number, and 0 otherwise.
-
 mydata<- mutate(mydata,has_cabin_number = ifelse(mydata$cabin=="",0,1))
-
 
 # Check if people who had no room were likely not to survive
 mydata %>% 
